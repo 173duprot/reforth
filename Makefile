@@ -1,10 +1,10 @@
 CFLAGS?=-Wall -Wno-unused -Wno-unused-result -O2 -g
-TURNKEY={ echo 'const char src_turnkey[] = {'; cat $(1) | xxd -i; echo ',0};'; } >src_turnkey.c
+TURNKEY={ echo 'const char src_turnkey[] = {'; cat $(1) | xxd -i; echo '0};'; } >src_turnkey.c
 
 normal: generic shell editor wordprocessor tools cgi rts
 
 generic:
-	{ echo 'const char src_base[] = {'; cat base.fs | xxd -i; echo ',0};'; } >src_base.c
+	{ echo 'const char src_base[] = {'; cat base.fs | xxd -i; echo '0};'; } >src_base.c
 	$(CC) -DLIB_SHELL -DLIB_REGEX -DLIB_FORK -o reforth reforth.c $(CFLAGS)
 	$(CC) -DDEBUG -DLIB_SHELL -DLIB_REGEX -DLIB_FORK -o reforth_debug reforth.c $(CFLAGS)
 	objdump -d reforth >reforth.dump

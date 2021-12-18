@@ -35,6 +35,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h>
 #include <unistd.h>
 #include <poll.h>
 #include <time.h>
@@ -504,7 +505,8 @@ scompile(char *s, tok **p)
 	tok *tokp = cp++;
 	char *d = (char*)cp;
 	// compile string + null terminator
-	while (*s) *d++ = *s++; *d++ = 0;
+	while (*s) *d++ = *s++;
+	*d++ = 0;
 	// align code-space pointer afterwards
 	while ((d - (char*)cp) % sizeof(tok)) *d++ = 0;
 	cp = (tok*)d;
